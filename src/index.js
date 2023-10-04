@@ -1,30 +1,22 @@
 const express = require('express');
-const mongoose = require('mongoose');
+const {engine} = require('express-handlebars');
+const methodOverride = require('method-override');
+
+const logger = require('./middlewares/logger');
+const route = require('./routes/index')
+const port = 5000;
+
 const app = express();
-const morgan = require('morgan');
-const dotenv = require('dotenv');
-dotenv.config();
-const cookieParser = require('cookie-parser');
-const route = require('./Routes');
-const DBconnection = require('./Utils/DBConnection');
+app.use(express.json()) 
+app.use(express.urlencoded({ extended: true }))
 
-// For some plugin
-app.use(
-    express.urlencoded({
-        extended: true,
-    })
-);
-app.use(express.json());
-app.use(cookieParser());
+app.use(logger);
+app.use(methodOverride('_method'));
 
-// HTTP logger
-app.use(morgan('combined'));
-// Routers
+app.engine('hbs', engine()); 
+app.set('view engine', 'hbs');   
+app.set('views', './views');
+
 route(app);
 
-// Thông báo đã bật server lên
-app.listen(5000, () => {
-    // db connection
-    DBconnection(mongoose);
-    console.log('connect to the backend hihi');
-});
+app.listen(port, ()=> console.log(`App is listening on http://localhost:${port}`));
