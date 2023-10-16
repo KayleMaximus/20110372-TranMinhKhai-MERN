@@ -1,22 +1,19 @@
-const express = require('express');
-const {engine} = require('express-handlebars');
-const methodOverride = require('method-override');
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import reportWebVitals from './reportWebVitals';
+import { ThemeProvider } from '@mui/material';
+import BlogApp from './BlogApp';
+// AppPractice
 
-const logger = require('./middlewares/logger');
-const route = require('./routes/index')
-const port = 5000;
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <BlogApp />
+  </React.StrictMode>
+);
 
-const app = express();
-app.use(express.json()) 
-app.use(express.urlencoded({ extended: true }))
-
-app.use(logger);
-app.use(methodOverride('_method'));
-
-app.engine('hbs', engine()); 
-app.set('view engine', 'hbs');   
-app.set('views', './views');
-
-route(app);
-
-app.listen(port, ()=> console.log(`App is listening on http://localhost:${port}`));
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
