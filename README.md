@@ -1,6 +1,6 @@
 # NodeJS-Self-Study
 
-1. clone source code: git clone --branch WEEK07 https://github.com/khoa36isefiw/NodeJS-Self-Study.git
+1. clone source code: git clone --branch WEEK07 https://github.com/KayleMaximus/20110372-TranMinhKhai-MERN.git
 2. Sau đó di chuyền vào folder server: cd Nasa_20110375/server
 3. Chạy lệnh : npm run watch
 ### Note nếu bước 3 bị lỗi
